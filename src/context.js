@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-//import items from "./data";
-import Client from "./Contentful";
-//Client.getEntries({content_type: "shuleFinder"}).then((response) => console.log(response.items));
+import items from "./data";
+//import Client from "./Contentful";
 
 const SchoolContext = React.createContext();
 
@@ -20,13 +19,33 @@ class SchoolProvider extends Component {
     };
 
 //getData
-getData = async () => {
-    try {
-        let response = await Client.getEntries({
-            content_type: "shuleFinder"
-        });
+// getData = async () => {
+//     try {
+//         let response = await Client.getEntries({
+//             content_type: "shuleFinder"
+//         });
         
-    let schools = this.formatData (response.items);
+//     let schools = this.formatData (response.items);
+//     let featuredSchools = schools.filter(school => school.featured === true);
+//     let maxPrice = Math.max(...schools.map(item => item.price));
+//     this.setState({
+//         schools,
+//         featuredSchools,
+//         sortedSchools: schools,
+//         loading: false,
+//         price: maxPrice,
+//         maxPrice
+//     });
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+componentDidMount () {
+   //this.getData ()
+
+    let schools = this.formatData (items);
     let featuredSchools = schools.filter(school => school.featured === true);
     let maxPrice = Math.max(...schools.map(item => item.price));
     this.setState({
@@ -37,26 +56,6 @@ getData = async () => {
         price: maxPrice,
         maxPrice
     });
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-componentDidMount () {
-    this.getData ()
-
-    // let schools = this.formatData (items);
-    // let featuredSchools = schools.filter(school => school.featured === true);
-    // let maxPrice = Math.max(...schools.map(item => item.price));
-    // this.setState({
-    //     schools,
-    //     featuredSchools,
-    //     sortedSchools: schools,
-    //     loading: false,
-    //     price: maxPrice,
-    //     maxPrice
-    // });
 }
 
 formatData (items) {
