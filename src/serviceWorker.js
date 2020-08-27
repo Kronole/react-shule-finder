@@ -115,6 +115,12 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
+self.addEventListener('sync', function(event) {
+  if (event.tag == 'firstSync') {
+    event.waitUntil(doSomeStuff());
+  }
+});
+
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
